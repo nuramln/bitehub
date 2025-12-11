@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>BiteHub — Login</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="icon" type="image/png" href="bitehub.png">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+body{
+  background: linear-gradient(135deg,#ffb703,#ff8800);
+  height:100vh;
+  margin:0;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-family:Arial, sans-serif;
+}
+
+.login-card{
+  width:450px;
+  background:white;
+  border-radius:22px;
+  padding:40px;
+  box-shadow:0 25px 40px rgba(0,0,0,.25);
+}
+
+img{
+  width:120px;
+  display:block;
+  margin:0 auto 15px auto;
+  height:auto;
+  object-fit:contain;
+  transform: scale(1.3);
+}
+
+input,button{
+  border-radius:12px ;
+}
+</style>
+</head>
+
+<body>
+
+<div class="login-card">
+
+  <img src="bitehub.png" alt="BiteHub Logo">
+
+  <h4 class="text-center mb-4"><strong>Login to BiteHub</strong></h4>
+
+<!--for admin or staff to login-->
+  <form onsubmit="return validateLogin(event)">
+    <input id="username" class="form-control mb-3" placeholder="Username">
+    <input id="password" type="password" class="form-control mb-2" placeholder="Password">
+
+    <p id="errorMsg" class="text-danger small mb-2"></p>
+
+    <button class="btn btn-warning w-100">Login</button>
+  </form>
+
+<!--go to register-->
+  <p class="text-center mt-3">
+    New user? <a href="register.html">Register</a>
+  </p>
+
+</div>
+
+<!--script for login (error)-->
+<script>
+
+function validateLogin(e){
+  e.preventDefault();
+
+  const username = document.getElementById("username").value.trim();
+  const pass = document.getElementById("password").value.trim();
+  const error = document.getElementById("errorMsg");
+
+  if(username === "" || pass === ""){
+    error.innerText = "Username and password cannot be empty!";
+    return;
+  }
+
+  const users = JSON.parse(localStorage.getItem("bitehubUsers")) || [];
+
+  const foundUser = users.find(u => u.username === username);
+
+  if(!foundUser){
+    error.innerText = "Username not found!";
+    return;
+  }
+
+  if(foundUser.password !== pass){
+    error.innerText = "Incorrect password!";
+    return;
+  }
+
+  window.location.href = "dashboard.html";
+}
+
+</script>
+
+</body>
+</html>

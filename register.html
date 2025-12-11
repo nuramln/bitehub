@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>BiteHub — Register</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="icon" type="image/png" href="bitehub.png">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+body{
+  background: linear-gradient(135deg,#ffb703,#ff8800);
+  height:100vh;
+  margin:0;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-family:Arial, sans-serif;
+}
+
+.register-card{
+  width:450px;
+  background:white;
+  border-radius:22px;
+  padding:40px;
+  box-shadow:0 25px 40px rgba(0,0,0,.25);
+}
+
+img{
+  width:120px;
+  display:block;
+  margin:0 auto 15px auto;
+  height:auto;
+  object-fit:contain;
+  transform: scale(1.3);
+}
+
+input,button{
+  border-radius:12px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="register-card">
+
+  <img src="bitehub.png">
+
+  <h4 class="text-center mb-3"><strong>Create Account</strong></h4>
+
+<!--admin or staff register-->
+  <form onsubmit="return registerUser(event)">
+    <input id="fullname" class="form-control mb-3" placeholder="Full Name">
+
+    <input id="username" class="form-control mb-3" placeholder="Username">
+
+    <input id="password" type="password" class="form-control mb-2" placeholder="Password">
+    <input id="confirm" type="password" class="form-control mb-2" placeholder="Confirm Password">
+
+    <p id="msg" class="small"></p>
+
+    <button class="btn btn-warning w-100">Register</button>
+  </form>
+
+  <p class="text-center mt-3">
+    Already have an account?
+    <a href="index.html">Login</a>
+  </p>
+
+</div>
+
+<!--script for registration-->
+<script>
+
+function registerUser(e){
+  e.preventDefault();
+
+  const fullname = document.getElementById("fullname").value.trim();
+  const username = document.getElementById("username").value.trim();
+  const pass = document.getElementById("password").value.trim();
+  const confirm = document.getElementById("confirm").value.trim();
+
+  const msg = document.getElementById("msg");
+
+  if(!fullname || !username || !pass || !confirm){
+    msg.innerHTML = "<span class='text-danger'>All fields are required!</span>";
+    return;
+  }
+
+  if(pass !== confirm){
+    msg.innerHTML = "<span class='text-danger'>Passwords do not match!</span>";
+    return;
+  }
+
+  let users = JSON.parse(localStorage.getItem("bitehubUsers")) || [];
+
+  if(users.find(u => u.username === username)){
+    msg.innerHTML = "<span class='text-danger'>Username already exists!</span>";
+    return;
+  }
+
+  users.push({ fullname, username, password: pass });
+  localStorage.setItem("bitehubUsers", JSON.stringify(users));
+
+  msg.innerHTML = "<span class='text-success'>Account created! Redirecting...</span>";
+
+  setTimeout(() => { window.location.href = "index.html"; }, 1200);
+}
+
+</script>
+
+</body>
+</html>

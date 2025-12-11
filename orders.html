@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>BiteHub — Orders</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="icon" type="image/png" href="bitehub.png">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+body { 
+  background:#f5f7ff;
+  font-family:'Poppins', sans-serif;
+  margin:0;
+}
+
+/* DESKTOP sidebar*/
+.sidebar {
+  width:220px;
+  height:100vh;
+  background:linear-gradient(180deg,#ffb703,#ff8800);
+  padding:20px;
+  position:fixed;
+  top:0;
+  left:0;
+  color:white;
+}
+
+.sidebar img{
+  width:100px;   
+  height:auto;
+  display:block;
+  margin:0 auto 25px auto;
+  object-fit:contain;
+  transform: scale(1.3);
+}
+
+.sidebar a {
+  display:block;
+  padding:12px;
+  color:white;
+  border-radius:10px;
+  margin-bottom:6px;
+  text-decoration:none;
+  transition:.2s;
+}
+
+.sidebar a:hover{
+  background:rgba(255,255,255,.25);
+  color:white;
+}
+
+/* MAIN */
+main {
+  margin-left:240px;
+  padding:30px 35px;
+}
+
+.table-box {
+  border-radius:18px;
+  overflow:hidden;
+  box-shadow:0 8px 20px rgba(0,0,0,.12);
+}
+
+thead {
+  background:#4b6cff;
+  color:white;
+}
+
+tbody tr:hover {
+  background:#eef2ff;
+  cursor:pointer;
+}
+
+/* MOBILE sidebar */
+@media(max-width:768px){
+  .sidebar {
+    width:100%;
+    height:auto;
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:12px 20px;
+  }
+
+.sidebar img{
+  width:100px;   
+  height:auto;
+  margin:0;
+  object-fit:contain;
+  transform: scale(1.3);
+}
+
+  .sidebar a {
+    display:inline-block;
+    margin:0 5px;
+  }
+
+  main {
+    margin-left:0;
+    margin-top:20px;
+  }
+}
+</style>
+</head>
+
+<body>
+<!--sidebar-->
+<div class="sidebar">
+  <img src="bitehub.png" alt="BiteHub Logo">
+
+<div>
+  <a href="dashboard.html">Dashboard</a>
+  <a href="menu.html">Menu</a>
+  <a href="orders.html">Orders</a>
+  <a href="feedback.html">Feedback</a>
+  <a href="index.html">Logout</a>
+</div>
+</div>
+
+<!--main-->
+<main>
+
+<h3 class="fw-bold mb-4">Customer Orders</h3>
+
+<!-- filter for customer status  -->
+<div class="d-flex flex-wrap gap-2 mb-3">
+  <select class="form-select w-auto" id="statusFilter">
+    <option selected disabled>Filter by Status</option>
+    <option value="all" selected>All</option>
+    <option>New</option>
+    <option>Preparing</option>
+    <option>Delivered</option>
+    <option>Cancelled</option>
+  </select>
+  <button class="btn btn-warning text-dark fw-semibold" id="searchBtn">Search</button>
+</div>
+
+<!-- table -->
+<div class="table-box">
+<table class="table table-hover mb-0 align-middle">
+<thead>
+<tr>
+  <th>ID</th>
+  <th>Customer</th>
+  <th>Item</th>
+  <th>Total</th>
+  <th>Status</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+  <td>#1028</td>
+  <td>Ali</td>
+  <td>Burger</td>
+  <td>RM 15.00</td>
+  <td><span class="badge bg-danger">Preparing</span></td>
+</tr>
+
+<tr>
+  <td>#1029</td>
+  <td>Aisyah</td>
+  <td>Spaghetti</td>
+  <td>RM 17.00</td>
+  <td><span class="badge bg-primary">New</span></td>
+
+</tr>
+
+<tr>
+  <td>#1030</td>
+  <td>Abu</td>
+  <td>Fish and Chips</td>
+  <td>RM 18.00</td>
+  <td><span class="badge bg-success">Delivered</span></td>
+</tr>
+
+<tr>
+  <td>#1031</td>
+  <td>Ahmad</td>
+  <td>Burger</td>
+  <td>RM 15.00</td>
+  <td><span class="badge bg-danger">Preparing</span></td>
+</tr>
+
+<tr>
+  <td>#1032</td>
+  <td>Hakim</td>
+  <td>Chicken Wings</td>
+  <td>RM 12.00</td>
+  <td><span class="badge bg-primary">New</span></td>
+</tr>
+
+<tr>
+  <td>#1033</td>
+  <td>Siti</td>
+  <td>Steak</td>
+  <td>RM 25.00</td>
+  <td><span class="badge bg-secondary">Cancelled</span></td>
+</tr>
+
+<tr>
+  <td>#1034</td>
+  <td>Fattah</td>
+  <td>Salad</td>
+  <td>RM 12.00</td>
+  <td><span class="badge bg-success">Delivered</span></td>
+</tr>
+
+<tr>
+  <td>#1035</td>
+  <td>Aminah</td>
+  <td>Pancakes</td>
+  <td>RM 10.00</td>
+  <td><span class="badge bg-primary">New</span></td>
+</tr>
+
+<tr>
+  <td>#1036</td>
+  <td>Kuza</td>
+  <td>Fries</td>
+  <td>RM 7.00</td>
+  <td><span class="badge bg-secondary">Cancelled</span></td>
+</tr>
+
+<tr>
+  <td>#1037</td>
+  <td>Laila</td>
+  <td>Spaghetti</td>
+  <td>RM 17.00</td>
+  <td><span class="badge bg-danger">Preparing</span></td>
+</tr>
+
+<tr>
+  <td>#1038</td>
+  <td>Amin</td>
+  <td>Fish and Chips</td>
+  <td>RM 18.00</td>
+  <td><span class="badge bg-success">Delivered</span></td>
+</tr>
+
+<tr>
+  <td>#1039</td>
+  <td>Puspa</td>
+  <td>Pizza</td>
+  <td>RN 20.00</td>
+  <td><span class="badge bg-success">Delivered</span></td>
+</tr>
+
+<tr>
+  <td>#1040</td>
+  <td>Haziq</td>
+  <td>Cheesecake</td>
+  <td>RM12.00</td>
+  <td><span class="badge bg-primary">New</span></td>
+</tr>
+
+</tbody>
+</table>
+</div>
+
+<!--footer-->
+<footer class="site-footer">
+  © 2025 BiteHub | All Rights Reserved
+</footer>
+
+</main>
+
+<!--script for filter  by customer status-->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const filter = document.getElementById("statusFilter");
+    const searchBtn = document.getElementById("searchBtn");
+    const rows = document.querySelectorAll("tbody tr");
+
+    searchBtn.addEventListener("click", () => {
+        const status = filter.value.toLowerCase();
+
+        rows.forEach(row => {
+            const cell = row.querySelector("td:nth-child(5)");
+            const text = cell.textContent.toLowerCase();
+
+            if (status === "all") {
+                row.style.display = "";
+            } else if (text.includes(status)) {
+                row.style.display = "";
+            } else {
+                row.style.display = "none";
+            }
+        });
+    });
+});
+</script>
+
+</body>
+</html>
